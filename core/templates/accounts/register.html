@@ -15,13 +15,21 @@
             <div class="card-body p-4">
               
               <div class="text-center">
-                <h1>Register</h1>
+
+                <h2>
+                  <a href="https://appseed.us/admin-dashboards/django-dashboard-coreui" >Django Dashboard CoreUI</a>
+                </h2>
+                <h5>Register</h5>
                 <p class="text-muted">
                   
                   {% if msg %}
                     {{ msg | safe }}
                   {% else %}
-                    Sign up with credentials
+                  <span>
+                    Add your credentials 
+                    <br />
+                    OR <a href={% url 'login' %} >authenticate</a> using an existing account.
+                  </span>
                   {% endif %}
 
                 </p>

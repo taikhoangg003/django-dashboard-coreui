@@ -16,13 +16,22 @@
               <div class="card-body">
 
                 <div class="text-center">
-                  <h1>Login</h1>
+
+                  <h2>
+                    <a href="https://appseed.us/admin-dashboards/django-dashboard-coreui" >Django Dashboard CoreUI</a>
+                  </h2>
+                  <h5>Login</h5>
+                  
                   <p class="text-muted">
 
                     {% if msg %}
                       {{ msg | safe }}
                     {% else %}
-                      Sign in with credentials
+                      <span>
+                        Use default credentials: <strong>test / pass</strong>
+                        <br />
+                        OR <a href={% url 'register' %} >create your own user</a>
+                      </span>
                     {% endif %}
 
                   </p>
