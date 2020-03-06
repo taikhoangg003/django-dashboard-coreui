@@ -1,12 +1,4 @@
-asgiref
-autopep8
-Django==2.1.*
-pycodestyle
-pytz
-sqlparse
+Django
 Unipath
-dj-database-url
 python-decouple
-gunicorn
 whitenoise
-django-heroku
