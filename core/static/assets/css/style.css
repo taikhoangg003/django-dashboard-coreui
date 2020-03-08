@@ -16153,6 +16153,10 @@ a.text-dark:hover, a.text-dark:focus {
   .badge {
     border: 1px solid #000015;
   }
+
+  .table-container {
+    width: 99% !important;
+  }
   .table {
     border-collapse: collapse !important;
   }

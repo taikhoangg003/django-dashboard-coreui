@@ -10,31 +10,35 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 from django.db import models
+import uuid
 
 
 class PAData(models.Model):
-    sku = models.CharField(verbose_name='Sku', max_length=125, blank=True, null=True)
-    name = models.CharField(verbose_name='Name', max_length=225, blank=True, null=True)
-    company = models.CharField(verbose_name='Company', max_length=125, blank=True, null=True)
-    brand = models.CharField(verbose_name='Brand', max_length=125, blank=True, null=True)
-    interspar_url = models.URLField(verbose_name='AT01 - Interspar', max_length=500, blank=True, null=True )
-    billa_url = models.URLField(verbose_name='AT02 - Billa', max_length=500, blank=True, null=True )
-    alfires_url = models.URLField(verbose_name='AT03 - Alfies', max_length=500, blank=True, null=True )
-
-    urban_url = models.URLField(verbose_name='AT04 - Urban Drink', max_length=500, blank=True, null=True )
-    weisshaus_url = models.URLField(verbose_name='AT05 - Weisshaus', max_length=500, blank=True, null=True )
-    spirituosenwelt_url = models.URLField(verbose_name='AT06 - Spirituosenwelt', max_length=500, blank=True, null=True )
-    expert24_url = models.URLField(verbose_name='AT07 - Expert24', max_length=500, blank=True, null=True )
-    # reisenhofer_url = models.URLField(verbose_name='AT08 - Reisenhofer', max_length=500, blank=True, null=True )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    zipcode = models.CharField(verbose_name='Zipcode', max_length=25, blank=True, null=True)
+    state = models.CharField(verbose_name='State', max_length=25, blank=True, null=True)
+    utility_name = models.CharField(verbose_name='Utility Name', max_length=125, blank=True, null=True)
+    utility_code = models.CharField(verbose_name='Utility Code', max_length=125, blank=True, null=True)
+    company_name = models.CharField(verbose_name='Company Name', max_length=500, blank=True, null=True )
+    plan_type = models.CharField(verbose_name='Plan type', max_length=500, blank=True, null=True )
     
+    price_rate = models.FloatField(verbose_name='Price rate', default=0)
+    monthly_fee = models.FloatField(verbose_name='Monthly free', default=0)
+    enrollment_fee = models.FloatField(verbose_name='Enrollment fee', default=0)
+    cancellation_fee = models.FloatField(verbose_name='Cancellation fee', default=0)
 
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.CharField(max_length=50, blank=True, null=True)
-    modified_at = models.DateTimeField(auto_now=True)
-    modified_by = models.CharField(max_length=50, blank=True, null=True)
-    child_scraped_key = models.CharField(max_length=50, blank=True, default='')
-    last_check_at = models.DateTimeField(auto_now_add=True)
+    term_length = models.CharField(verbose_name='Term length', max_length=25, blank=True, null=True )
+    renewable = models.CharField(verbose_name='Renewable', max_length=25, blank=True, null=True )
+    product_info = models.CharField(verbose_name='Product info', max_length=500, blank=True, null=True )
+    phone_number = models.CharField(verbose_name='Phone number', max_length=250, blank=True, null=True )
+    signup_url = models.CharField(verbose_name='Signup url', max_length=500, blank=True, null=True )
+    product_last_update = models.DateField(verbose_name='Product last update', blank=True, null=True)
+    site_name = models.CharField(verbose_name='Site name', max_length=500, blank=True, null=True )
+    domain_name = models.CharField(verbose_name='Domain name', max_length=500, blank=True, null=True )
+    
+    last_scraped = models.DateTimeField(verbose_name='Scraped time', auto_now_add=True)
+    ref_url = models.CharField(verbose_name='Refernce url', max_length=500, blank=True, null=True )
     table_name = models.CharField(max_length=65, blank=True, null=True)
     
     def __str__(self):

@@ -2,3 +2,7 @@ Django
 Unipath
 python-decouple
 whitenoise
+django-tables2
+django_filters
+mysqlclient
+tablib

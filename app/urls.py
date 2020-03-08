@@ -12,5 +12,7 @@ urlpatterns = [
     re_path(r'^.*\.html', views.pages, name='pages'),
 
     # The home page
-    path('', views.index, name='home'),
+    # path('', views.index, name='home'),
+    path('', views.DashboardView.as_view(), name='home'),
+    path('pa/list', views.PADataListView.as_view(), name='pa_list'),
 ]

@@ -17,7 +17,7 @@
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
     
     <title>
-        Django Dashboard CoreUI - {% block title %}{% endblock %} | AppSeed
+        {% block title %}{% endblock %} | XYZ Coperation
     </title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="/static/assets/favicon/apple-icon-57x57.png">
@@ -55,11 +55,20 @@
   <body class="c-app">
 
     {% include 'includes/sidebar.html' %}
-
+    
     <div class="c-wrapper">
-
-      {% include 'includes/navigation.html' %}
-
+      <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+            {% include 'includes/navigation.html' %}
+            <div class="c-subheader px-3">
+              <!-- Breadcrumb-->
+              <ol class="breadcrumb border-0 m-0">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                {% block breadcrumb %} {% endblock breadcrumb %}
+                <!-- Breadcrumb Menu-->
+              </ol>
+          </div>
+          
+      </header>
       <div class="c-body">
         <main class="c-main">
 

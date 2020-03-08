@@ -1,0 +1,73 @@
+{% extends "layouts/base-site.html" %}
+{% load render_table from django_tables2 %}
+{% load widget_tweaks %}
+
+{% block title %} PAPowerswitch Data List {% endblock %} 
+{% block breadcrumb %} 
+<li class="breadcrumb-item">PAPowerswitch List</li>
+{% endblock %} 
+
+{% block content %}
+  
+<div class="container-fluid">
+  <div class="fade-in">
+    <div class="card">
+      <form class="form-horizontal" action="{% url 'pa_list'%}" method="get">
+      <div class="card-body">  
+          <div class="form-group row">
+            <div class="col-12">
+              {{ filter.form.company_name.label_tag }}
+              {% render_field filter.form.company_name class="form-control" %}
+            </div>
+            <div class="col-6">
+              {{ filter.form.zipcode.label_tag }}
+              {% render_field filter.form.zipcode class="form-control" %}
+            </div>
+
+            <div class="col-6">
+              {{ filter.form.state.label_tag }}
+              {% render_field filter.form.state class="form-control" %}
+            </div>
+
+            <div class="col-6">
+              {{ filter.form.utility_name.label_tag }}
+              {% render_field filter.form.utility_name class="form-control" %}
+            </div>
+
+            <div class="col-6">
+              {{ filter.form.utility_code.label_tag }}
+              {% render_field filter.form.utility_code class="form-control" %}
+            </div>
+          </div>
+
+      </div>
+      <div class="card-footer" style="text-align: center;">
+        <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
+        <a href="{% url 'pa_list'%}" class="btn btn-sm btn-primary" role="button">Reset</a>
+      </div>
+    </form>
+    </div>    
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <style>
+      .table-container {
+          width: 99.9%;
+      }
+    </style>
+    {% render_table data_table %}
+  </div>
+  <div class="row" style="padding-top:40px;">
+    <p class="text-center">
+        <a href="{% querystring '_export'='csv' %}" class="mb-xs mt-xs mr-xs btn btn-primary" role="button">Export data</a>  
+          
+    </p>
+  </div>
+</div>
+
+
+{% endblock content %}
