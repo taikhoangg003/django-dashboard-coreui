@@ -5,12 +5,9 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.db import models
-from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
-
-from django.db import models
-import uuid
 
 
 class PAData(models.Model):
@@ -33,13 +30,21 @@ class PAData(models.Model):
     product_info = models.CharField(verbose_name='Product info', max_length=500, blank=True, null=True )
     phone_number = models.CharField(verbose_name='Phone number', max_length=250, blank=True, null=True )
     signup_url = models.CharField(verbose_name='Signup url', max_length=500, blank=True, null=True )
-    product_last_update = models.DateField(verbose_name='Product last update', blank=True, null=True)
+    product_last_update = models.CharField(verbose_name='Last update', max_length=65, blank=True, null=True )
+    
     site_name = models.CharField(verbose_name='Site name', max_length=500, blank=True, null=True )
     domain_name = models.CharField(verbose_name='Domain name', max_length=500, blank=True, null=True )
     
     last_scraped = models.DateTimeField(verbose_name='Scraped time', auto_now_add=True)
     ref_url = models.CharField(verbose_name='Refernce url', max_length=500, blank=True, null=True )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.CharField(max_length=50, blank=True, null=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    modified_by = models.CharField(max_length=50, blank=True, null=True)
+    scraped_key = models.CharField(max_length=50, blank=True, null=True)
     table_name = models.CharField(max_length=65, blank=True, null=True)
+    
     
     def __str__(self):
         return self.name

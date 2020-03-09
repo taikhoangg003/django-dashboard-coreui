@@ -4,6 +4,8 @@ from django_tables2.utils import A
 
 
 class PADataTable(tables.Table):
+    company_name = tables.TemplateColumn('<a data-toggle="modal" data-target="#myModal" id="{{record.id}}" style="padding: 0 5px" href="#{{record.id}}" onclick="view_detail(\'{{record.id}}\')">{{record.company_name}}</a>')
+    company_name  = tables.LinkColumn('pa_detail', text=lambda record: record.company_name, args=[A('pk')])
 
     class Meta:
         attrs = {
