@@ -27,7 +27,7 @@ class PAData(models.Model):
 
     term_length = models.CharField(verbose_name='Term length', max_length=25, blank=True, null=True )
     renewable = models.CharField(verbose_name='Renewable', max_length=25, blank=True, null=True )
-    product_info = models.CharField(verbose_name='Product info', max_length=500, blank=True, null=True )
+    product_info = models.TextField(verbose_name='Product info', max_length=500, blank=True, null=True)
     phone_number = models.CharField(verbose_name='Phone number', max_length=250, blank=True, null=True )
     signup_url = models.CharField(verbose_name='Signup url', max_length=500, blank=True, null=True )
     product_last_update = models.CharField(verbose_name='Last update', max_length=65, blank=True, null=True )
