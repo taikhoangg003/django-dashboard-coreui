@@ -62,9 +62,8 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
     
     table_class = PADataTable
     context_object_name = 'data_table'
-    ordering = ['company_name']
-    
     template_name = "app/padata_list.html"
+    my_export_data = None
 
     
 
@@ -72,17 +71,28 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
         list = PAData.objects.all()
         filter = PADataFilter(self.request.GET, queryset=list)
         data_table = PADataTable(filter.qs)
+        
         RequestConfig(self.request).configure(data_table)
-        per_page = self.request.GET.get('per_page', 10)
+        per_page = self.request.GET.get('per_page', 500)
         data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
-
-        self.dataset_kwargs = data_table
+        self.my_export_data = data_table
         context = super(PADataListView, self).get_context_data(**kwargs)
         context['data_table'] = data_table
         context['filter'] = filter
         # import pdb; pdb.set_trace()
         
         return context
+    
+    def create_export(self, export_format):
+        
+        exporter = self.export_class(
+            export_format=export_format,
+            table=self.my_export_data,
+            # exclude_columns=self.exclude_columns,
+            # dataset_kwargs=self.get_dataset_kwargs(),
+        )
+
+        return exporter.response(filename=self.get_export_filename(export_format))
 
 class PADataDetailView(LoginRequiredMixin, DetailView):
     model = PAData

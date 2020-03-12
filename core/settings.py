@@ -154,3 +154,5 @@ LOGIN_URL = '/login'
 # Test change 2
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+
+SHORT_DATE_FORMAT = 'M d,Y H:i'

@@ -24,8 +24,7 @@ class PAData(models.Model):
     enrollment_fee = models.FloatField(verbose_name='Enrollment fee', default=0)
     cancellation_fee = models.FloatField(verbose_name='Cancellation fee', default=0)
 
-
-    term_length = models.CharField(verbose_name='Term length', max_length=25, blank=True, null=True )
+    term_length = models.IntegerField(verbose_name='Term length', blank=True, null=True )
     renewable = models.CharField(verbose_name='Renewable', max_length=25, blank=True, null=True )
     product_info = models.TextField(verbose_name='Product info', max_length=500, blank=True, null=True)
     phone_number = models.CharField(verbose_name='Phone number', max_length=250, blank=True, null=True )
@@ -47,4 +46,8 @@ class PAData(models.Model):
     
     
     def __str__(self):
-        return self.name
+        return self.company_name
+    
+    class Meta:
+        
+        ordering = ['price_rate', 'zipcode', 'state', 'plan_type', 'term_length', 'monthly_fee', 'product_last_update']
