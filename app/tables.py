@@ -24,7 +24,6 @@ class PADataTable(tables.Table):
     domain_name = tables.Column(visible=False)
     
     product_info = tables.Column(visible=False)
-    ref_url = tables.Column(visible=False)
 
     last_scraped = tables.DateTimeColumn(format ='M d,Y-h:iA')
     
