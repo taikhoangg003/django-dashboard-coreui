@@ -2,6 +2,10 @@ import django_tables2 as tables
 from .models import *
 from django_tables2.utils import A
 
+class PersonColumn(tables.Column):
+
+    def render(self, record):
+        return "{} {}".format(record.price_rate, record.price_rate)
 
 class PADataTable(tables.Table):
     
@@ -11,6 +15,19 @@ class PADataTable(tables.Table):
         args=[A('pk')],
         footer=lambda table: 'Total: {} records'.format(len(table.data))
         )
+    
+    est_monthly = tables.Column(
+        accessor='price_rate', 
+        verbose_name='Est Monthly Bill', 
+        attrs={
+            'td': {
+                'style': 'text-align:center;'
+            }
+        }
+    )
+    def render_est_monthly(self, value, record):
+        return  round(700*record.price_rate + record.monthly_fee,2)
+
 
     # defind hindden column for export data
     
@@ -43,6 +60,7 @@ class PADataTable(tables.Table):
             'monthly_fee', 
             'enrollment_fee',
             'cancellation_fee',
+            'est_monthly',
             'term_length',
             'renewable',
             'product_info',
