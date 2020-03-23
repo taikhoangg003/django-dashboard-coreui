@@ -41,6 +41,9 @@ class PADataTable(tables.Table):
     domain_name = tables.Column(visible=False)
     
     product_info = tables.Column(visible=False)
+    current_ptc = tables.Column(visible=False)
+    future_ptc = tables.Column(visible=False)
+    future_ptc_date = tables.Column(visible=False)
 
     last_scraped = tables.DateTimeColumn(format ='M d,Y-h:iA')
     
@@ -68,6 +71,9 @@ class PADataTable(tables.Table):
             'signup_url',
             'site_name',
             'domain_name',
+            'current_ptc',
+            'future_ptc',
+            'future_ptc_date',
             'product_last_update',
             'last_scraped',
         )
