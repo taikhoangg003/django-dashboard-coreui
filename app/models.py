@@ -37,8 +37,8 @@ class PAData(models.Model):
     last_scraped = models.DateTimeField(verbose_name='Scraped time', auto_now_add=True)
 
 
-    current_ptc = models.FloatField(verbose_name='Current PTC', default=0)
-    future_ptc = models.FloatField(verbose_name='Future PTC', default=0)
+    current_ptc = models.FloatField(verbose_name='Current PTC', blank=True, null=True )
+    future_ptc = models.FloatField(verbose_name='Future PTC', blank=True, null=True)
     future_ptc_date = models.CharField(verbose_name='Fureture PTC date', max_length=500, default='', blank=True, null=True)
     
     ref_url = models.CharField(verbose_name='Refernce url', max_length=500, blank=True, null=True )
