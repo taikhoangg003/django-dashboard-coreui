@@ -11,7 +11,6 @@ import uuid
 
 
 class PAData(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     zipcode = models.CharField(verbose_name='Zipcode', max_length=25, blank=True, null=True)
     state = models.CharField(verbose_name='State', max_length=25, blank=True, null=True)
     utility_name = models.CharField(verbose_name='Utility Name', max_length=125, blank=True, null=True)
