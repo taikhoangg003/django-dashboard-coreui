@@ -79,7 +79,7 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
         data_table = PADataTable(filter.qs)
         
         RequestConfig(self.request).configure(data_table)
-        per_page = self.request.GET.get('per_page', 500)
+        per_page = self.request.GET.get('per_page', 100)
         data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
         self.my_export_data = data_table
         context = super(PADataListView, self).get_context_data(**kwargs)
@@ -121,7 +121,7 @@ class OhioListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
         data_table = OhioTable(filter.qs)
         
         RequestConfig(self.request).configure(data_table)
-        per_page = self.request.GET.get('per_page', 500)
+        per_page = self.request.GET.get('per_page', 100)
         data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
         self.my_export_data = data_table
         context = super(OhioListView, self).get_context_data(**kwargs)
