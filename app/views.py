@@ -68,7 +68,7 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
     
 
     def get_context_data(self, **kwargs):
-        list = PAData.objects.all()
+        list = PAData.objects.all().filter(created_by='pa_spd')
         filter = PADataFilter(self.request.GET, queryset=list)
         data_table = PADataTable(filter.qs)
         
@@ -79,7 +79,6 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
         context = super(PADataListView, self).get_context_data(**kwargs)
         context['data_table'] = data_table
         context['filter'] = filter
-        # import pdb; pdb.set_trace()
         
         return context
     
@@ -97,3 +96,43 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
 class PADataDetailView(LoginRequiredMixin, DetailView):
     model = PAData
     template_name = "app/padata_detail.html"
+
+
+
+class OhioListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
+    model = PAData
+    
+    table_class = OhioTable
+    context_object_name = 'data_table'
+    template_name = "app/ohio_list.html"
+    my_export_data = None
+
+    
+
+    def get_context_data(self, **kwargs):
+        list = PAData.objects.filter(created_by='ohio_spd')
+        filter = OhioFilter(self.request.GET, queryset=list)
+        data_table = OhioTable(filter.qs)
+        
+        RequestConfig(self.request).configure(data_table)
+        per_page = self.request.GET.get('per_page', 500)
+        data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
+        self.my_export_data = data_table
+        context = super(OhioListView, self).get_context_data(**kwargs)
+        context['data_table'] = data_table
+        context['filter'] = filter
+        
+        return context
+    
+    def create_export(self, export_format):
+        
+        exporter = self.export_class(
+            export_format=export_format,
+            table=self.my_export_data,
+            # exclude_columns=self.exclude_columns,
+            # dataset_kwargs=self.get_dataset_kwargs(),
+        )
+
+        return exporter.response(filename=self.get_export_filename(export_format))
+
+

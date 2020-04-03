@@ -78,3 +78,43 @@ class PADataTable(tables.Table):
             'last_scraped',
         )
 
+class OhioTable(PADataTable):
+    new_customer_offer = tables.Column(visible=False)
+    term_of_service = tables.Column(visible=False)
+    est_monthly = tables.Column(visible=False)
+    product_last_update = tables.Column(visible=False)
+
+    def render_est_monthly(self, value, record):
+        return  ''
+    class Meta:
+        attrs = {
+            'class':'table table-responsive-sm table-bordered table-striped table-sm'
+        }
+        model = PAData
+        fields = (
+            'zipcode',
+            'state', 
+            'utility_name',
+            'utility_code', 
+            'company_name', 
+            'price_rate',
+            'plan_type',
+            'monthly_fee', 
+            'enrollment_fee',
+            'cancellation_fee',
+            'est_monthly',
+            'term_length',
+            'renewable',
+            'product_info',
+            'phone_number',
+            'signup_url',
+            'site_name',
+            'domain_name',
+            'current_ptc',
+            'future_ptc',
+            'future_ptc_date',
+            'new_customer_offer',
+            'term_of_service',
+            'product_last_update',
+            'last_scraped',
+        )

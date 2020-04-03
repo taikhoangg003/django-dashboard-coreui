@@ -39,6 +39,11 @@ class PAData(models.Model):
     current_ptc = models.FloatField(verbose_name='Current PTC', blank=True, null=True )
     future_ptc = models.FloatField(verbose_name='Future PTC', blank=True, null=True)
     future_ptc_date = models.CharField(verbose_name='Fureture PTC date', max_length=500, default='', blank=True, null=True)
+
+    # This for ohio scraper
+    new_customer_offer = models.CharField(verbose_name='New Customer Offer ', max_length=500, default='', blank=True, null=True)
+    # This for ohio scraper
+    term_of_service = models.CharField(verbose_name='Terms of Service ', max_length=500, default='', blank=True, null=True)
     
     ref_url = models.CharField(verbose_name='Refernce url', max_length=500, blank=True, null=True )
     

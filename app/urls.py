@@ -16,4 +16,7 @@ urlpatterns = [
     path('', views.DashboardView.as_view(), name='home'),
     path('pa/list', views.PADataListView.as_view(), name='pa_list'),
     path('pa/detail/<pk>', views.PADataDetailView.as_view(), name='pa_detail'),
+    path('ohio/list', views.OhioListView.as_view(), name='ohio_list'),
+    path('ohio/detail/<pk>', views.PADataDetailView.as_view(), name='ohio_detail'),
+    
 ]
