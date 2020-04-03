@@ -49,11 +49,17 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        context['total_records'] = PAData.objects.all().count()
-        context['company_no'] = PAData.objects.exclude(company_name__isnull=True).values('company_name').order_by('company_name').distinct().count()
-        context['state_no'] = PAData.objects.exclude(state__isnull=True).values('state').order_by('state').distinct().count()
-        latest_item = PAData.objects.latest('created_at')
-        context['last_scraped'] = latest_item.created_at.replace(tzinfo=timezone('Europe/Vienna'))
+        context['pa_total_records'] = PAData.objects.all().filter(created_by='pa_spd').count()
+        context['pa_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='pa_spd').values('company_name').order_by('company_name').distinct().count()
+        context['pa_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='pa_spd').values('state').order_by('state').distinct().count()
+        latest_item = PAData.objects.filter(created_by='pa_spd').latest('created_at')
+        context['pa_last_scraped'] = latest_item.created_at.replace(tzinfo=timezone('Europe/Vienna'))
+
+        context['ohio_total_records'] = PAData.objects.all().filter(created_by='ohio_spd').count()
+        context['ohio_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='ohio_spd').values('company_name').order_by('company_name').distinct().count()
+        context['ohio_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='ohio_spd').values('state').order_by('state').distinct().count()
+        latest_item = PAData.objects.filter(created_by='ohio_spd').latest('created_at')
+        context['ohio_last_scraped'] = latest_item.created_at.replace(tzinfo=timezone('Europe/Vienna'))
 
         return context
 
@@ -136,3 +142,6 @@ class OhioListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
         return exporter.response(filename=self.get_export_filename(export_format))
 
 
+class OhioDetailView(LoginRequiredMixin, DetailView):
+    model = PAData
+    template_name = "app/ohio_detail.html"

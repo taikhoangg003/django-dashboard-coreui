@@ -79,6 +79,12 @@ class PADataTable(tables.Table):
         )
 
 class OhioTable(PADataTable):
+    company_name  = tables.LinkColumn(
+        'ohio_detail', 
+        text=lambda record: record.company_name, 
+        args=[A('pk')],
+        footer=lambda table: 'Total: {} records'.format(len(table.data))
+        )
     new_customer_offer = tables.Column(visible=False)
     term_of_service = tables.Column(visible=False)
     est_monthly = tables.Column(visible=False)
