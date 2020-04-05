@@ -119,8 +119,8 @@ class OhioTable(PADataTable):
             'current_ptc',
             'future_ptc',
             'future_ptc_date',
-            'new_customer_offer',
-            'term_of_service',
             'product_last_update',
             'last_scraped',
+            'new_customer_offer',
+            'term_of_service',
         )

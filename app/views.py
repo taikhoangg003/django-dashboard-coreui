@@ -20,6 +20,7 @@ from .models import *
 from .filters import *
 from .tables import *
 from pytz import timezone
+import time
 
 @login_required(login_url="/login/")
 def pages(request):
@@ -52,14 +53,22 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['pa_total_records'] = PAData.objects.all().filter(created_by='pa_spd').count()
         context['pa_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='pa_spd').values('company_name').order_by('company_name').distinct().count()
         context['pa_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='pa_spd').values('state').order_by('state').distinct().count()
-        latest_item = PAData.objects.filter(created_by='pa_spd').latest('created_at')
-        context['pa_last_scraped'] = latest_item.created_at.replace(tzinfo=timezone('Europe/Vienna'))
+        latest_item = PAData.objects.filter(created_by='pa_spd')
+        if latest_item:
+            latest_item = latest_item.latest('created_at')
+            context['pa_last_scraped'] = latest_item.created_at
+        else:
+            context['pa_last_scraped'] = None
 
         context['ohio_total_records'] = PAData.objects.all().filter(created_by='ohio_spd').count()
         context['ohio_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='ohio_spd').values('company_name').order_by('company_name').distinct().count()
         context['ohio_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='ohio_spd').values('state').order_by('state').distinct().count()
-        latest_item = PAData.objects.filter(created_by='ohio_spd').latest('created_at')
-        context['ohio_last_scraped'] = latest_item.created_at.replace(tzinfo=timezone('Europe/Vienna'))
+        latest_item = PAData.objects.filter(created_by='ohio_spd')
+        if latest_item:
+            latest_item = latest_item.latest('created_at')
+            context['ohio_last_scraped'] = latest_item.created_at
+        else:
+            context['ohio_last_scraped'] = None
 
         return context
 
@@ -70,7 +79,7 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
     context_object_name = 'data_table'
     template_name = "app/padata_list.html"
     my_export_data = None
-
+    export_name='Papowerswitch_' + time.strftime('%Y%m%d_%H_%M_%S')
     
 
     def get_context_data(self, **kwargs):
@@ -112,7 +121,7 @@ class OhioListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
     context_object_name = 'data_table'
     template_name = "app/ohio_list.html"
     my_export_data = None
-
+    export_name='Enerygychoiceohio_' + time.strftime('%Y%m%d_%H_%M_%S')
     
 
     def get_context_data(self, **kwargs):
