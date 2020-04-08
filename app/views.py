@@ -154,3 +154,46 @@ class OhioListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
 class OhioDetailView(LoginRequiredMixin, DetailView):
     model = PAData
     template_name = "app/ohio_detail.html"
+
+
+
+class OhioGasListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
+    model = PAData
+    
+    table_class = OhioGasTable
+    context_object_name = 'data_table'
+    template_name = "app/ohio_gas_list.html"
+    my_export_data = None
+    export_name='Enerygychoiceohio_gas_' + time.strftime('%Y%m%d_%H_%M_%S')
+    
+
+    def get_context_data(self, **kwargs):
+        list = PAData.objects.filter(created_by='ohio_gas_spd')
+        filter = OhioGasFilter(self.request.GET, queryset=list)
+        data_table = OhioGasTable(filter.qs)
+        
+        RequestConfig(self.request).configure(data_table)
+        per_page = self.request.GET.get('per_page', 100)
+        data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
+        self.my_export_data = data_table
+        context = super(OhioGasListView, self).get_context_data(**kwargs)
+        context['data_table'] = data_table
+        context['filter'] = filter
+        
+        return context
+    
+    def create_export(self, export_format):
+        
+        exporter = self.export_class(
+            export_format=export_format,
+            table=self.my_export_data,
+            # exclude_columns=self.exclude_columns,
+            # dataset_kwargs=self.get_dataset_kwargs(),
+        )
+
+        return exporter.response(filename=self.get_export_filename(export_format))
+
+
+class OhioGasDetailView(LoginRequiredMixin, DetailView):
+    model = PAData
+    template_name = "app/ohio_gas_detail.html"

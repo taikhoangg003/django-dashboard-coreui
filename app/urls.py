@@ -19,5 +19,8 @@ urlpatterns = [
     
     path('ohio/list', views.OhioListView.as_view(), name='ohio_list'),
     path('ohio/detail/<pk>', views.OhioDetailView.as_view(), name='ohio_detail'),
+
+    path('ohio-gas/list', views.OhioGasListView.as_view(), name='ohio_gas_list'),
+    path('ohio-gas/detail/<pk>', views.OhioGasDetailView.as_view(), name='ohio_gas_detail'),
     
 ]

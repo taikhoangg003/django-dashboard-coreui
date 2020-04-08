@@ -124,3 +124,12 @@ class OhioTable(PADataTable):
             'new_customer_offer',
             'term_of_service',
         )
+
+class OhioGasTable(OhioTable):
+    company_name  = tables.LinkColumn(
+        'ohio_gas_detail', 
+        text=lambda record: record.company_name, 
+        args=[A('pk')],
+        footer=lambda table: 'Total: {} records'.format(len(table.data))
+        )
+    
