@@ -50,6 +50,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
+        ## pa data
         context['pa_total_records'] = PAData.objects.all().filter(created_by='pa_spd').count()
         context['pa_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='pa_spd').values('company_name').order_by('company_name').distinct().count()
         context['pa_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='pa_spd').values('state').order_by('state').distinct().count()
@@ -60,6 +61,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         else:
             context['pa_last_scraped'] = None
 
+        ## Ohio
         context['ohio_total_records'] = PAData.objects.all().filter(created_by='ohio_spd').count()
         context['ohio_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='ohio_spd').values('company_name').order_by('company_name').distinct().count()
         context['ohio_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='ohio_spd').values('state').order_by('state').distinct().count()
@@ -69,6 +71,17 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             context['ohio_last_scraped'] = latest_item.created_at
         else:
             context['ohio_last_scraped'] = None
+
+        ## Ohio Gas
+        context['ohio_gas_total_records'] = PAData.objects.all().filter(created_by='ohio_gas_spd').count()
+        context['ohio_gas_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='ohio_gas_spd').values('company_name').order_by('company_name').distinct().count()
+        context['ohio_gas_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='ohio_gas_spd').values('state').order_by('state').distinct().count()
+        latest_item = PAData.objects.filter(created_by='ohio_gas_spd')
+        if latest_item:
+            latest_item = latest_item.latest('created_at')
+            context['ohio_gas_last_scraped'] = latest_item.created_at
+        else:
+            context['ohio_gas_last_scraped'] = None
 
         return context
 
