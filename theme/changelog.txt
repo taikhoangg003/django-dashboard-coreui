@@ -1,0 +1,36 @@
+Covid-19 -Corona virus Medical Prevention Template
+
+Changelog:
+
+Version: 2.0.0  Date: 12-04-2020
+1. Add Home Page 7
+2. Minor css improve
+3. Add Js file improve
+
+Version: 1.0.4  Date: 02-04-2020
+1. Add Home Page 5 & Home Page 6
+2. Minor css improve
+3. Add Js file improve
+
+
+Version: 1.0.3  Date: 29-03-2020
+1. Add Home Page 4
+2. Add OnePage & Box-Layout Page
+3. Add contact.php File
+4. Cart Page improve
+5. Minor css improve
+6. Add Js file improve
+
+
+Version: 1.0.2  Date: 26-03-2020
+1. Add Shop Page, Shop Single Page & Cart Page variation
+2. Add RTL Supported
+3. Minor css improve
+4. Add Js file improve
+
+
+Version: 1.0.1  Date: 24-03-2020
+1. Add 1 homepage variation
+2. Minor css improve
+3. Add Js file improve
+

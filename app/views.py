@@ -50,61 +50,29 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        ## pa data
-        context['pa_total_records'] = PAData.objects.all().filter(created_by='pa_spd').count()
-        context['pa_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='pa_spd').values('company_name').order_by('company_name').distinct().count()
-        context['pa_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='pa_spd').values('state').order_by('state').distinct().count()
-        latest_item = PAData.objects.filter(created_by='pa_spd')
-        if latest_item:
-            latest_item = latest_item.latest('created_at')
-            context['pa_last_scraped'] = latest_item.created_at
-        else:
-            context['pa_last_scraped'] = None
-
-        ## Ohio
-        context['ohio_total_records'] = PAData.objects.all().filter(created_by='ohio_spd').count()
-        context['ohio_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='ohio_spd').values('company_name').order_by('company_name').distinct().count()
-        context['ohio_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='ohio_spd').values('state').order_by('state').distinct().count()
-        latest_item = PAData.objects.filter(created_by='ohio_spd')
-        if latest_item:
-            latest_item = latest_item.latest('created_at')
-            context['ohio_last_scraped'] = latest_item.created_at
-        else:
-            context['ohio_last_scraped'] = None
-
-        ## Ohio Gas
-        context['ohio_gas_total_records'] = PAData.objects.all().filter(created_by='ohio_gas_spd').count()
-        context['ohio_gas_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='ohio_gas_spd').values('company_name').order_by('company_name').distinct().count()
-        context['ohio_gas_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='ohio_gas_spd').values('state').order_by('state').distinct().count()
-        latest_item = PAData.objects.filter(created_by='ohio_gas_spd')
-        if latest_item:
-            latest_item = latest_item.latest('created_at')
-            context['ohio_gas_last_scraped'] = latest_item.created_at
-        else:
-            context['ohio_gas_last_scraped'] = None
 
         return context
 
-class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
-    model = PAData
+class CovidListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
+    model = Covid
     
-    table_class = PADataTable
+    table_class = CovidTable
     context_object_name = 'data_table'
-    template_name = "app/padata_list.html"
+    template_name = "app/covid_list.html"
     my_export_data = None
-    export_name='Papowerswitch_' + time.strftime('%Y%m%d_%H_%M_%S')
+    export_name='Covid_' + time.strftime('%Y%m%d_%H_%M_%S')
     
 
     def get_context_data(self, **kwargs):
-        list = PAData.objects.all().filter(created_by='pa_spd')
-        filter = PADataFilter(self.request.GET, queryset=list)
-        data_table = PADataTable(filter.qs)
+        list = Covid.objects.all()
+        filter = CovidFilter(self.request.GET, queryset=list)
+        data_table = CovidTable(filter.qs)
         
         RequestConfig(self.request).configure(data_table)
         per_page = self.request.GET.get('per_page', 100)
         data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
         self.my_export_data = data_table
-        context = super(PADataListView, self).get_context_data(**kwargs)
+        context = super(CovidListView, self).get_context_data(**kwargs) 
         context['data_table'] = data_table
         context['filter'] = filter
         
@@ -120,93 +88,3 @@ class PADataListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
         )
 
         return exporter.response(filename=self.get_export_filename(export_format))
-
-class PADataDetailView(LoginRequiredMixin, DetailView):
-    model = PAData
-    template_name = "app/padata_detail.html"
-
-
-
-class OhioListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
-    model = PAData
-    
-    table_class = OhioTable
-    context_object_name = 'data_table'
-    template_name = "app/ohio_list.html"
-    my_export_data = None
-    export_name='Enerygychoiceohio_' + time.strftime('%Y%m%d_%H_%M_%S')
-    
-
-    def get_context_data(self, **kwargs):
-        list = PAData.objects.filter(created_by='ohio_spd')
-        filter = OhioFilter(self.request.GET, queryset=list)
-        data_table = OhioTable(filter.qs)
-        
-        RequestConfig(self.request).configure(data_table)
-        per_page = self.request.GET.get('per_page', 100)
-        data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
-        self.my_export_data = data_table
-        context = super(OhioListView, self).get_context_data(**kwargs)
-        context['data_table'] = data_table
-        context['filter'] = filter
-        
-        return context
-    
-    def create_export(self, export_format):
-        
-        exporter = self.export_class(
-            export_format=export_format,
-            table=self.my_export_data,
-            # exclude_columns=self.exclude_columns,
-            # dataset_kwargs=self.get_dataset_kwargs(),
-        )
-
-        return exporter.response(filename=self.get_export_filename(export_format))
-
-
-class OhioDetailView(LoginRequiredMixin, DetailView):
-    model = PAData
-    template_name = "app/ohio_detail.html"
-
-
-
-class OhioGasListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
-    model = PAData
-    
-    table_class = OhioGasTable
-    context_object_name = 'data_table'
-    template_name = "app/ohio_gas_list.html"
-    my_export_data = None
-    export_name='Enerygychoiceohio_gas_' + time.strftime('%Y%m%d_%H_%M_%S')
-    
-
-    def get_context_data(self, **kwargs):
-        list = PAData.objects.filter(created_by='ohio_gas_spd')
-        filter = OhioGasFilter(self.request.GET, queryset=list)
-        data_table = OhioGasTable(filter.qs)
-        
-        RequestConfig(self.request).configure(data_table)
-        per_page = self.request.GET.get('per_page', 100)
-        data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
-        self.my_export_data = data_table
-        context = super(OhioGasListView, self).get_context_data(**kwargs)
-        context['data_table'] = data_table
-        context['filter'] = filter
-        
-        return context
-    
-    def create_export(self, export_format):
-        
-        exporter = self.export_class(
-            export_format=export_format,
-            table=self.my_export_data,
-            # exclude_columns=self.exclude_columns,
-            # dataset_kwargs=self.get_dataset_kwargs(),
-        )
-
-        return exporter.response(filename=self.get_export_filename(export_format))
-
-
-class OhioGasDetailView(LoginRequiredMixin, DetailView):
-    model = PAData
-    template_name = "app/ohio_gas_detail.html"
