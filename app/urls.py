@@ -13,7 +13,7 @@ urlpatterns = [
 
     # The home page
     # path('', views.index, name='home'),
-    path('', views.DashboardView.as_view(), name='home'),
+    path('dasdboard', views.DashboardView.as_view(), name='dasdboard'),
     path('covid/list', views.CovidListView.as_view(), name='covid_list'),
 
     

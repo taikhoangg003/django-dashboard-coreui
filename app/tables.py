@@ -11,4 +11,15 @@ class CovidTable(tables.Table):
             'class':'table table-responsive-sm table-bordered table-striped table-sm'
         }
         model = Covid
-        
+        fields =[
+            'name',
+            'group',
+            'confirmed',
+            'confirmed_changed',
+            'recovered',
+            'recovered_changed',
+            'deaths',
+            'deaths_changed',
+            'tests',
+            'date',
+        ]

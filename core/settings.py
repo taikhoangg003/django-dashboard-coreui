@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',  # Enable the inner app 
+    'frontend',  # Enable the inner app 
     'django_tables2',
     'django_filters',
     'widget_tweaks',

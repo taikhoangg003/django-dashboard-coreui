@@ -9,7 +9,10 @@ class CovidFilter(django_filters.FilterSet):
             'name': ['icontains'],
         }
     
-    
+    name = django_filters.CharFilter(
+        label='Country/Other', 
+        lookup_expr='icontains'
+        )
 
     # Filter by group
     all_groups = Covid.objects.all().values('group').order_by('group').distinct()
