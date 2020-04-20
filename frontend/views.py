@@ -23,7 +23,7 @@ from pytz import timezone
 import time
 
 
-class HomepageView(LoginRequiredMixin, TemplateView):
+class HomepageView(TemplateView):
     template_name = "frontend/index.html"
     
     def get_context_data(self, **kwargs):
