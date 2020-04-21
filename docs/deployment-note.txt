@@ -114,4 +114,4 @@ pip3 install -r requirements.txt
 
 Set crontabl
 crontab -e
-0 0 * * * nohup /home/adtuan/scrapingbox/covid/sourcecode/scraper/runjob.sh &> /home/adtuan/scrapingbox/covid/sourcecode/scraper/scraper_log.out &
+0 * * * * nohup /home/adtuan/scrapingbox/covid/sourcecode/scraper/runjob.sh &> /home/adtuan/scrapingbox/covid/sourcecode/scraper/scraper_log.out &
