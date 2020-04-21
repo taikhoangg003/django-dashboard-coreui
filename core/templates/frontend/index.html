@@ -13,14 +13,14 @@
 							<div class="content-part">
 								<div class="banner-content">
                                     <h2>COVID-19 Tracker</h2>
-                                    <h4>Tatal Confirmed Corona Cases</h4>
-                                    <h2 class="count-people">960708</h2>
+                                    <h4>Total Confirmed Cases</h4>
+                                    <h2 class="count-people">{{world_status.confirmed|default:''|intcomma}}</h2>
                                     <ul class="lab-ul">
-                                        <li>Active cases <span class="count-people">799571</span></li>
-                                        <li>Recovered cases <span class="count-people">302826</span></li>
-                                        <li>Deaths <span class="count-people">52558</span></li>
+                                        <li>Active cases <span class="count-people">{{world_status.active_case|default:''|intcomma}}</span></li>
+                                        <li>Recovered cases <span class="count-people">{{world_status.recovered|default:''|intcomma}}</span></li>
+                                        <li>Deaths <span class="count-people">{{world_status.deaths|default:''|intcomma}}</span></li>
                                     </ul>
-                                    <a href="#" class="lab-btn style-2"><span>Meet the doctor</span></a>
+                                    
 								</div>
 							</div>
                         </div>

@@ -23,10 +23,11 @@ from pytz import timezone
 import time
 
 
-class HomepageView(LoginRequiredMixin, TemplateView):
+class HomepageView(TemplateView):
     template_name = "frontend/index.html"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['covid_table'] = Covid.objects.all()
+        context['world_status'] = Covid.objects.get(group__exact='World')
         return context

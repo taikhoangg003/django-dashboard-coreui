@@ -120,11 +120,48 @@ class Etuannv(scrapy.Spider):
             data_item.add_value('deaths_changed', row.xpath("./td[5]/text()").get())
             
             data_item.add_value('recovered', row.xpath("./td[6]/text()").get())
-            data_item.add_value('active_cases', row.xpath("./td[7]/text()").get())
+            data_item.add_value('active_case', row.xpath("./td[7]/text()").get())
 
             data_item.add_value('tests', row.xpath("./td[11]/text()").get())
             
             data_item.add_value('group', row.xpath("./td[last()]/@data-continent").get())
+            
+            ts = time.time()
+            timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+            data_item.add_value('created_at', timestamp)
+            data_item.add_value('created_by', self.name)
+            data_item.add_value('modified_at', timestamp)
+            data_item.add_value('last_scraped', timestamp)
+            data_item.add_value('modified_by', self.name)
+            data_item.add_value('table_name', 'app_covid')
+            data_item.add_value('ref_url', response.url)
+
+            yield data_item.load_item()
+        
+        # Get world info
+        row = response.xpath("//table[@id='main_table_countries_today']/tbody/tr[td[text()='World']]")
+        if row:
+            data_item = ItemLoader(item=CovidItem(), response=response)
+            from datetime import date
+            today = date.today()
+            name = row.xpath("./td[1]/text()").get()
+            item_id = md5(('{}_{}'.format(name, today)).encode('utf-8')).hexdigest()
+            data_item.add_value('id', item_id)
+            
+            data_item.add_value('name', name)
+            data_item.add_value('date', today)
+            data_item.add_value('confirmed', row.xpath("./td[2]/text()").get())
+            data_item.add_value('confirmed_changed', row.xpath("./td[3]/text()").get())
+            
+            data_item.add_value('deaths', row.xpath("./td[4]/text()").get())
+            data_item.add_value('deaths_changed', row.xpath("./td[5]/text()").get())
+            
+            data_item.add_value('recovered', row.xpath("./td[6]/text()").get())
+            data_item.add_value('active_case', row.xpath("./td[7]/text()").get())
+
+            data_item.add_value('tests', row.xpath("./td[11]/text()").get())
+            
+            data_item.add_value('group', 'World')
             
             ts = time.time()
             timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')

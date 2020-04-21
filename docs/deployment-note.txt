@@ -1,0 +1,106 @@
+ssh adtuan@178.128.88.112
+HQhqraAgzLMU92Vh
+
+
+Mysql: covid/covid@demo2019
+
+4. Create an mysql account for admin website
+$ sudo mysql
+mysql> CREATE DATABASE covid CHARACTER SET 'utf8';
+mysql> CREATE USER 'covid'@'localhost' IDENTIFIED BY 'covid@demo2019';
+mysql> GRANT ALL ON covid.* TO 'covid'@'localhost';
+mysql> quit
+
+5. Upload source code to server and config source, db, virtual env
+- (Upload: scp /Users/etuannv/scraping/covid_scraper/sourcecode/covid_web.zip adtuan@45.76.112.223:/home/adtuan/)
+or check out with Git
+mkdir covid
+git clone https://github.com/etuannv/django-dashboard-coreui.git
+git checkout covid24
+
+
+
+- Create virtual env: virtualenv -p /usr/bin/python3 web_env
+- Active virtual env: source web_env/bin/activate 
+- Install requirement environment: pip3 install -r requirements.txt 
+- Setting dabase connect: vi settings.py
+- (optional): testing the server: 
+sudo ufw allow 8000
+python manage.py runserver 0.0.0.0:8000
+
+7. Create uWSGI config ini file
+sudo vi /etc/uwsgi/sites/covid_web.ini
+
+- The covid_web.ini file 
+
+[uwsgi]
+project = adminwebsite
+uid = adtuan
+base = /home/%(uid)/scrapingbox/covid/sourcecode
+
+chdir = %(base)/%(project)
+home = %(base)/%(project)/web_env
+module = %(project).wsgi:application
+
+master = true
+processes = 5
+
+socket = %(base)/%(project).sock
+chown-socket = %(uid):www-data
+chmod-socket = 666
+vacuum = true
+
+# master
+master = true
+# số worker tối đa
+processes = 10
+
+
+
+7. Configure Nginx
+
+sudo vi /etc/nginx/sites-available/covid_web
+
+- The covid_web file
+
+server {
+    listen 80;
+    server_name covid.etuannv.com;
+    root /home/adtuan/scrapingbox/covid/sourcecode/adminwebsite;
+
+    location = /favicon.ico {access_log off; log_not_found off; }
+
+    location /static/  {
+        alias /home/adtuan/scrapingbox/covid/sourcecode/adminwebsite/static/;
+    }
+    
+    location / {
+        include        /etc/nginx/uwsgi_params;
+        uwsgi_pass     unix:///home/adtuan/scrapingbox/covid/sourcecode/adminwebsite.sock;
+    }
+}
+
+- Link to site-available
+sudo ln -s /etc/nginx/sites-available/covid_web /etc/nginx/sites-enabled/covid_web
+
+- Verify your nginx config syntax
+sudo nginx -t
+- After that restart Nginx service to load the new config
+sudo systemctl restart nginx
+
+- Finally, start your uWSGI server
+sudo systemctl start uwsgi
+
+
+
+
+==================================================
+Config schedule to run the covid_scraper
+mkdir scraper_env
+virtualenv -p /usr/bin/python3 scraper_env
+source scraper_env/bin/activate 
+pip3 install -r requirements.txt 
+
+Set crontabl
+crontab -e
+0 0 * * * nohup /home/adtuan/scrapingbox/covid/sourcecode/scraper/runjob.sh &> /home/adtuan/scrapingbox/covid/sourcecode/scraper/scraper_log.out &
