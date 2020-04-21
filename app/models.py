@@ -21,6 +21,8 @@ class Covid(models.Model):
     recovered = models.BigIntegerField(verbose_name='Recovered', default=0 ,blank=True, null=True)
     recovered_changed = models.FloatField(verbose_name='Recovered Change Today', blank=True, null=True)
 
+    active_case = models.BigIntegerField(verbose_name='Active Cases', default=0 ,blank=True, null=True)
+
     deaths = models.BigIntegerField(verbose_name='Deaths', default=0 ,blank=True, null=True)
     deaths_changed = models.FloatField(verbose_name='Deaths Change Today', blank=True, null=True)
 

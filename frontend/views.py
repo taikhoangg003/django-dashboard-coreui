@@ -16,7 +16,7 @@ from django_tables2 import RequestConfig
 import django_tables2 as tables
 from django_tables2.export.views import ExportMixin
 
-from .models import *
+from app.models import *
 # from .filters import *
 # from .tables import *
 from pytz import timezone
@@ -28,5 +28,5 @@ class HomepageView(LoginRequiredMixin, TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        context['covid_table'] = Covid.objects.all()
         return context

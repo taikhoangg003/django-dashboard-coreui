@@ -120,7 +120,7 @@ class Etuannv(scrapy.Spider):
             data_item.add_value('deaths_changed', row.xpath("./td[5]/text()").get())
             
             data_item.add_value('recovered', row.xpath("./td[6]/text()").get())
-            data_item.add_value('recovered_changed', row.xpath("./td[7]/text()").get())
+            data_item.add_value('active_cases', row.xpath("./td[7]/text()").get())
 
             data_item.add_value('tests', row.xpath("./td[11]/text()").get())
             

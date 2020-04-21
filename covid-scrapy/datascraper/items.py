@@ -241,6 +241,8 @@ class CovidItem(scrapy.Item):
     deaths=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
     deaths_changed=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
     tests=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+
+    active_case=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
     
     last_scraped=scrapy.Field(input_processor=MapCompose(processText), output_processor=TakeFirst())
     ref_url=scrapy.Field(input_processor=MapCompose(processText), output_processor=TakeFirst())
