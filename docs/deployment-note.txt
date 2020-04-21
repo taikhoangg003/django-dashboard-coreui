@@ -18,8 +18,19 @@ mkdir covid
 git clone https://github.com/etuannv/django-dashboard-coreui.git
 git checkout covid24
 
+5.1 Create .env file
+vim .env
+DB_NAME=covid
+DB_USER=covid
+DB_PASSWORD=covid@demo2019
+DB_HOST=127.0.0.1
+DB_PORT=3306
+
+SECRET_KEY=S3crEt_9966
+PRODUCTION_SERVER=178.128.88.112
 
 
+6. Create virtualenv
 - Create virtual env: virtualenv -p /usr/bin/python3 web_env
 - Active virtual env: source web_env/bin/activate 
 - Install requirement environment: pip3 install -r requirements.txt 
