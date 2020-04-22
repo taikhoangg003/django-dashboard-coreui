@@ -171,8 +171,12 @@ div.dataTables_wrapper div.dataTables_filter {
 .dataTable_wrapper h2 a {
 	color: #e3e8ea;
 }
-.table {
-  margin-left: 20px!important;
+.table tr > th, 
+.table tr > td{
+  padding-left: 20px;
+}
+.table th {
+  
 }
 .custom-select {
 	color: #e3e8ea;
