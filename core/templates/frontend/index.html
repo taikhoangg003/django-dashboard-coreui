@@ -56,12 +56,12 @@
 					  {% for item in covid_europe %}
 						<tr>
 						<td>{{item.name|default:''}}</td>
-						<td>{{item.total_case|default:''|intcomma}}</td>
-						<td>{{item.new_case|default:''|intcomma}}</td>
-						<td>{{item.deaths|default:''|intcomma}}</td>
-						<td>{{item.new_deaths|default:''|intcomma}}</td>
-						<td>{{item.total_recovered|default:''|intcomma}}</td>
-						<td>{{item.active_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.total_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.new_case|default:''|intcomma}}</td>
+						<td class="text_red">{{item.deaths|default:''|intcomma}}</td>
+						<td class="text_red">{{item.new_deaths|default:''|intcomma}}</td>
+						<td class="text_green">{{item.total_recovered|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.active_case|default:''|intcomma}}</td>
 						</tr>
 						{%endfor %}
 					
@@ -90,12 +90,12 @@
 					  {% for item in covid_north_america %}
 						<tr>
 						<td>{{item.name|default:''}}</td>
-						<td>{{item.total_case|default:''|intcomma}}</td>
-						<td>{{item.new_case|default:''|intcomma}}</td>
-						<td>{{item.deaths|default:''|intcomma}}</td>
-						<td>{{item.new_deaths|default:''|intcomma}}</td>
-						<td>{{item.total_recovered|default:''|intcomma}}</td>
-						<td>{{item.active_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.total_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.new_case|default:''|intcomma}}</td>
+						<td class="text_red">{{item.deaths|default:''|intcomma}}</td>
+						<td class="text_red">{{item.new_deaths|default:''|intcomma}}</td>
+						<td class="text_green">{{item.total_recovered|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.active_case|default:''|intcomma}}</td>
 						</tr>
 						{%endfor %}
 					
@@ -125,12 +125,12 @@
 					  {% for item in covid_asia %}
 						<tr>
 						<td>{{item.name|default:''}}</td>
-						<td>{{item.total_case|default:''|intcomma}}</td>
-						<td>{{item.new_case|default:''|intcomma}}</td>
-						<td>{{item.deaths|default:''|intcomma}}</td>
-						<td>{{item.new_deaths|default:''|intcomma}}</td>
-						<td>{{item.total_recovered|default:''|intcomma}}</td>
-						<td>{{item.active_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.total_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.new_case|default:''|intcomma}}</td>
+						<td class="text_red">{{item.deaths|default:''|intcomma}}</td>
+						<td class="text_red">{{item.new_deaths|default:''|intcomma}}</td>
+						<td class="text_green">{{item.total_recovered|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.active_case|default:''|intcomma}}</td>
 						</tr>
 						{%endfor %}
 					
@@ -160,12 +160,12 @@
 					  {% for item in covid_oceania %}
 						<tr>
 						<td>{{item.name|default:''}}</td>
-						<td>{{item.total_case|default:''|intcomma}}</td>
-						<td>{{item.new_case|default:''|intcomma}}</td>
-						<td>{{item.deaths|default:''|intcomma}}</td>
-						<td>{{item.new_deaths|default:''|intcomma}}</td>
-						<td>{{item.total_recovered|default:''|intcomma}}</td>
-						<td>{{item.active_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.total_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.new_case|default:''|intcomma}}</td>
+						<td class="text_red">{{item.deaths|default:''|intcomma}}</td>
+						<td class="text_red">{{item.new_deaths|default:''|intcomma}}</td>
+						<td class="text_green">{{item.total_recovered|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.active_case|default:''|intcomma}}</td>
 						</tr>
 						{%endfor %}
 					
@@ -195,12 +195,12 @@
 					  {% for item in covid_africa %}
 						<tr>
 						<td>{{item.name|default:''}}</td>
-						<td>{{item.total_case|default:''|intcomma}}</td>
-						<td>{{item.new_case|default:''|intcomma}}</td>
-						<td>{{item.deaths|default:''|intcomma}}</td>
-						<td>{{item.new_deaths|default:''|intcomma}}</td>
-						<td>{{item.total_recovered|default:''|intcomma}}</td>
-						<td>{{item.active_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.total_case|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.new_case|default:''|intcomma}}</td>
+						<td class="text_red">{{item.deaths|default:''|intcomma}}</td>
+						<td class="text_red">{{item.new_deaths|default:''|intcomma}}</td>
+						<td class="text_green">{{item.total_recovered|default:''|intcomma}}</td>
+						<td class="text_yellow">{{item.active_case|default:''|intcomma}}</td>
 						</tr>
 						{%endfor %}
 					

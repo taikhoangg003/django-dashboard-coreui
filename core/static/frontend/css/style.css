@@ -113,6 +113,18 @@ h5 {
 h6 {
   font-size: 16px; }
 
+.text_yellow {
+  color: #ff9d00 !important;
+}
+
+.text_red {
+  color: #fd4e65 !important;
+}
+
+.text_green {
+  color: #5add9f !important;
+}
+  
 .table {
 	border: none;
 }
@@ -121,17 +133,22 @@ h6 {
 	border-right: none;
 	border-left: none;
 	border-top: none;
-	border-bottom: 1px solid #ecf0f336!important;
+	border-bottom: none;
 	color: #e3e8ea;
 }
 
 .table td {
-	font-weight: normal;
-	font-size: 13px;
+	font-weight: 600;
+	font-size: 14px;
 	color: #e3e8ea;
 	padding: 8px 0;
 }
-table.dataTable thead .th-sm::after, table.dataTable thead .th-sm::before {
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.12);
+}
+
+.table.dataTable thead .th-sm::after, table.dataTable thead .th-sm::before {
 
 }
 .table-bordered tfoot {
@@ -4811,3 +4828,5 @@ body.rtl {
     padding-left: 60px; }
 
 /*# sourceMappingURL=style.css.map */
+
+
