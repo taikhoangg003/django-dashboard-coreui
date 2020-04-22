@@ -16,11 +16,12 @@ from django_tables2 import RequestConfig
 import django_tables2 as tables
 from django_tables2.export.views import ExportMixin
 
-from .models import *
+from app.models import *
 # from .filters import *
 # from .tables import *
 from pytz import timezone
 import time
+from datetime import date
 
 
 class HomepageView(TemplateView):
@@ -28,5 +29,12 @@ class HomepageView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        today = date.today()
+        context['covid_europe'] = Covid.objects.filter(date=today, group__iexact='Europe')
+        context['covid_africa'] = Covid.objects.filter(date=today, group__iexact='Africa')
+        context['covid_north_america'] = Covid.objects.filter(date=today, group__iexact='North America')
+        context['covid_asia'] = Covid.objects.filter(date=today, group__iexact='Asia')
+        context['covid_oceania'] = Covid.objects.filter(date=today, group__iexact='Australia/Oceania')
+        context['world_status'] = Covid.objects.filter(date=today, group__iexact='World').get()
+        
         return context

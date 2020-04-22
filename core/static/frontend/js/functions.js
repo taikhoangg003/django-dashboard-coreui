@@ -132,7 +132,7 @@
         });
         
         // counterup js start here
-        $('.count-number, .count-people, .cv-count, .bfr-total').each(function () {
+        $('.count-number, .cv-count, .bfr-total').each(function () {
             var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
             $(this).prop('Counter', 0).animate({
                Counter: $(this).text()
