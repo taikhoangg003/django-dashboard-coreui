@@ -10,5 +10,5 @@ from frontend import views
 urlpatterns = [
 
     # The home page
-    path('', views.HomepageView.as_view(), name='index'),
+    # path('', views.HomepageView.as_view(), name='index'),
 ]
