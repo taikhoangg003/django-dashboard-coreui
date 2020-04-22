@@ -16,10 +16,13 @@
                                     <h4>Total Confirmed Cases</h4>
                                     <h2 class="count-people">{{world_status.total_case|default:''|intcomma}}</h2>
                                     <ul class="lab-ul">
-                                        <li>Active cases <span class="count-people">{{world_status.active_case|default:''|intcomma}}</span></li>
-                                        <li>Recovered cases <span class="count-people">{{world_status.total_recovered|default:''|intcomma}}</span></li>
+										<li>Active cases <span class="count-people">{{world_status.active_case|default:''|intcomma}}</span></li>
+										<li>New cases <span class="count-people">{{world_status.new_case|default:''|intcomma}}</span></li>
+										<li>Recovered cases <span class="count-people">{{world_status.total_recovered|default:''|intcomma}}</span></li>
+										
 										<li>Deaths <span class="count-people">{{world_status.deaths|default:''|intcomma}}</span></li>
-										<p style="color: #999; font-size:12px; text-align:right ;font-style:italic">Updated few munites ago</p>
+										<li>New Deaths <span class="count-people">{{world_status.new_deaths|default:''|intcomma}}</span></li>
+										<p style="color: #999; font-size:12px; text-align:right ;font-style:italic">Updated {{world_status.modified_at|naturaltime}}</p>
                                     </ul>
                                     
 								</div>

@@ -22,6 +22,7 @@ from app.models import *
 from pytz import timezone
 import time
 from datetime import date
+from datetime import datetime
 
 
 class HomepageView(TemplateView):
@@ -30,6 +31,7 @@ class HomepageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         today = date.today()
+        print(datetime.now())
         context['covid_europe'] = Covid.objects.filter(date=today, group__iexact='Europe')
         context['covid_africa'] = Covid.objects.filter(date=today, group__iexact='Africa')
         context['covid_north_america'] = Covid.objects.filter(date=today, group__iexact='North America')

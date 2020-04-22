@@ -1750,10 +1750,18 @@ div#example_filter {
       color: #fff;
       padding: 8px 0 8px 20px;
       font-size: 18px; }
+      .banner-section.home-3 .banner-area .content-part .banner-content ul li:nth-child(1)::after {
+        background: #ff9d00; }
       .banner-section.home-3 .banner-area .content-part .banner-content ul li:nth-child(2)::after {
-        background: #4fe04e; }
+        background: #ff9d00; }
       .banner-section.home-3 .banner-area .content-part .banner-content ul li:nth-child(3)::after {
-        background: #ff5f5e; }
+        background: #5add9f; }
+      
+      .banner-section.home-3 .banner-area .content-part .banner-content ul li:nth-child(4)::after {
+          background: #fd4e65; }
+
+      .banner-section.home-3 .banner-area .content-part .banner-content ul li:nth-child(5)::after {
+        background: #fd4e65; }
       .banner-section.home-3 .banner-area .content-part .banner-content ul li::after {
         -webkit-border-radius: 100%;
         -moz-border-radius: 100%;
