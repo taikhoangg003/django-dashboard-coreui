@@ -232,14 +232,17 @@ class CovidItem(scrapy.Item):
 
     group=scrapy.Field(input_processor=MapCompose(processText), output_processor=TakeFirst())
     
-    confirmed=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
-    confirmed_changed=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
     
-    recovered=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
-    recovered_changed=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+    total_case=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+    new_case=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+    
+    total_recovered=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+
+    active_case=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
     
     deaths=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
-    deaths_changed=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+    new_deaths=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
+    
     tests=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())
 
     active_case=scrapy.Field(input_processor=MapCompose(processMoney), output_processor=TakeFirst())

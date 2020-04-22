@@ -14,19 +14,17 @@ class Covid(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(verbose_name='Name', max_length=25, blank=True, null=True)
     group = models.CharField(verbose_name='Group by country or city', max_length=25, blank=True, null=True)
-    confirmed = models.BigIntegerField(verbose_name='Confirmed', default=0 ,blank=True, null=True)
-    confirmed_changed = models.FloatField(verbose_name='Confirmed Change Today', blank=True, null=True)
-    
+    total_case = models.IntegerField(verbose_name='Total cases', default=0, blank=True, null=True)
+    new_case = models.IntegerField(verbose_name='New Cases', default=0, blank=True, null=True)
 
-    recovered = models.BigIntegerField(verbose_name='Recovered', default=0 ,blank=True, null=True)
-    recovered_changed = models.FloatField(verbose_name='Recovered Change Today', blank=True, null=True)
+    total_recovered = models.IntegerField(verbose_name='Total Recovered', default=0 ,blank=True, null=True)
 
-    active_case = models.BigIntegerField(verbose_name='Active Cases', default=0 ,blank=True, null=True)
+    active_case = models.IntegerField(verbose_name='Active Cases', default=0 ,blank=True, null=True)
 
-    deaths = models.BigIntegerField(verbose_name='Deaths', default=0 ,blank=True, null=True)
-    deaths_changed = models.FloatField(verbose_name='Deaths Change Today', blank=True, null=True)
+    deaths = models.IntegerField(verbose_name='Deaths', default=0 ,blank=True, null=True)
+    new_deaths = models.IntegerField(verbose_name='New Deaths', blank=True, null=True)
 
-    tests = models.BigIntegerField(verbose_name='Tests', default=0 ,blank=True, null=True)
+    tests = models.IntegerField(verbose_name='Tests', default=0 ,blank=True, null=True)
     
     date = models.DateField(auto_now=True)
     
@@ -41,8 +39,8 @@ class Covid(models.Model):
     
     
     def __str__(self):
-        return self.company_name
+        return self.name
     
     class Meta:
         
-        ordering = ['confirmed', 'deaths', 'recovered', 'tests']
+        ordering = ['total_case', 'new_case', 'deaths', 'tests']

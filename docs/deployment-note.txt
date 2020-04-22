@@ -45,18 +45,18 @@ sudo vi /etc/uwsgi/sites/covid_web.ini
 - The covid_web.ini file 
 
 [uwsgi]
-project = adminwebsite
+project = covid24
 uid = adtuan
-base = /home/%(uid)/scrapingbox/covid/sourcecode
+base = /home/%(uid)/
 
 chdir = %(base)/%(project)
 home = %(base)/%(project)/web_env
-module = %(project).wsgi:application
+module = core.wsgi:application
 
 master = true
 processes = 5
 
-socket = %(base)/%(project).sock
+socket = %(base)/%(project)/%(project).sock
 chown-socket = %(uid):www-data
 chmod-socket = 666
 vacuum = true
@@ -76,18 +76,18 @@ sudo vi /etc/nginx/sites-available/covid_web
 
 server {
     listen 80;
-    server_name covid.etuannv.com;
-    root /home/adtuan/scrapingbox/covid/sourcecode/adminwebsite;
+    server_name covid24h.live;
+    root /home/adtuan/covid24;
 
     location = /favicon.ico {access_log off; log_not_found off; }
 
     location /static/  {
-        alias /home/adtuan/scrapingbox/covid/sourcecode/adminwebsite/static/;
+        alias /home/adtuan/covid24/staticfiles/;
     }
     
     location / {
         include        /etc/nginx/uwsgi_params;
-        uwsgi_pass     unix:///home/adtuan/scrapingbox/covid/sourcecode/adminwebsite.sock;
+        uwsgi_pass     unix:///home/adtuan/covid24/covid24.sock;
     }
 }
 
@@ -114,4 +114,4 @@ pip3 install -r requirements.txt
 
 Set crontabl
 crontab -e
-0 * * * * nohup /home/adtuan/scrapingbox/covid/sourcecode/scraper/runjob.sh &> /home/adtuan/scrapingbox/covid/sourcecode/scraper/scraper_log.out &
+0 * * * * nohup /home/adtuan/covid24/covid-scrapy/job_run_all_spider.sh &> /home/adtuan/covid24/covid-scrapy/scraper_log.out &

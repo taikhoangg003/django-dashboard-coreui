@@ -12,10 +12,11 @@
 <!-- Your custom scripts (optional) -->
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#dtCovid19').DataTable({
+        $('.table-covid').DataTable({
             "paging": false,
             "scrollY": "400px",
             "scrollCollapse": true,
+            "order": [[ 1, "desc" ]]
         });
         $('.dataTables_length').addClass('bs-select');
     });
