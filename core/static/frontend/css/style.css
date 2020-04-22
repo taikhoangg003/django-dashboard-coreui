@@ -156,16 +156,23 @@ h6 {
 }
 .dataTable_wrapper {
 	background: rgba(6, 38, 77, 0.7);
-	padding: 12px 20px;	
+	padding: 12px 0;	
 }
 .dataTable_wrapper {
 	color: #e3e8ea;
 }
 .dataTable_wrapper h2 {
-	position: absolute;
+  position: absolute;
+  padding: 0 20px;
+}
+div.dataTables_wrapper div.dataTables_filter {
+  padding-right: 20px;
 }
 .dataTable_wrapper h2 a {
 	color: #e3e8ea;
+}
+.table {
+  margin-left: 20px!important;
 }
 .custom-select {
 	color: #e3e8ea;
