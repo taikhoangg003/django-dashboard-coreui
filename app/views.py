@@ -53,38 +53,38 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
         return context
 
-class CovidListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
-    model = Covid
+# class CovidListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
+#     model = Covid
     
-    table_class = CovidTable
-    context_object_name = 'data_table'
-    template_name = "app/covid_list.html"
-    my_export_data = None
-    export_name='Covid_' + time.strftime('%Y%m%d_%H_%M_%S')
+#     table_class = CovidTable
+#     context_object_name = 'data_table'
+#     template_name = "app/covid_list.html"
+#     my_export_data = None
+#     export_name='Covid_' + time.strftime('%Y%m%d_%H_%M_%S')
     
 
-    def get_context_data(self, **kwargs):
-        list = Covid.objects.all()
-        filter = CovidFilter(self.request.GET, queryset=list)
-        data_table = CovidTable(filter.qs)
+#     def get_context_data(self, **kwargs):
+#         list = Covid.objects.all()
+#         filter = CovidFilter(self.request.GET, queryset=list)
+#         data_table = CovidTable(filter.qs)
         
-        RequestConfig(self.request).configure(data_table)
-        per_page = self.request.GET.get('per_page', 100)
-        data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
-        self.my_export_data = data_table
-        context = super(CovidListView, self).get_context_data(**kwargs) 
-        context['data_table'] = data_table
-        context['filter'] = filter
+#         RequestConfig(self.request).configure(data_table)
+#         per_page = self.request.GET.get('per_page', 100)
+#         data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
+#         self.my_export_data = data_table
+#         context = super(CovidListView, self).get_context_data(**kwargs) 
+#         context['data_table'] = data_table
+#         context['filter'] = filter
         
-        return context
+#         return context
     
-    def create_export(self, export_format):
+#     def create_export(self, export_format):
         
-        exporter = self.export_class(
-            export_format=export_format,
-            table=self.my_export_data,
-            # exclude_columns=self.exclude_columns,
-            # dataset_kwargs=self.get_dataset_kwargs(),
-        )
+#         exporter = self.export_class(
+#             export_format=export_format,
+#             table=self.my_export_data,
+#             # exclude_columns=self.exclude_columns,
+#             # dataset_kwargs=self.get_dataset_kwargs(),
+#         )
 
-        return exporter.response(filename=self.get_export_filename(export_format))
+#         return exporter.response(filename=self.get_export_filename(export_format))
