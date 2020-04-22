@@ -76,7 +76,25 @@ sudo vi /etc/nginx/sites-available/covid_web
 
 server {
     listen 80;
-    server_name covid24h.live;
+    listen [::]:80;
+    server_name covid24h.live www.covid24h.live;
+    return 302 https://$server_name$request_uri;
+}
+
+
+server {
+
+    # SSL configuration
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    #ssl        on;
+    ssl_certificate         /etc/ssl/certs/cert.pem;
+    ssl_certificate_key     /etc/ssl/private/key.pem;
+    ssl_client_certificate /etc/ssl/certs/cloudflare.crt;
+    ssl_verify_client on;
+
+    server_name covid24h.live www.covid24h.live;
     root /home/adtuan/covid24;
 
     location = /favicon.ico {access_log off; log_not_found off; }
@@ -84,12 +102,15 @@ server {
     location /static/  {
         alias /home/adtuan/covid24/staticfiles/;
     }
-    
+
     location / {
         include        /etc/nginx/uwsgi_params;
         uwsgi_pass     unix:///home/adtuan/covid24/covid24.sock;
+        try_files $uri $uri/ =404;
     }
 }
+
+
 
 - Link to site-available
 sudo ln -s /etc/nginx/sites-available/covid_web /etc/nginx/sites-enabled/covid_web
