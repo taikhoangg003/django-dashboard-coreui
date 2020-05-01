@@ -159,7 +159,8 @@ h6 {
 	padding: 12px 0;	
 }
 .dataTable_wrapper {
-	color: #e3e8ea;
+  color: #e3e8ea;
+  margin-top: 35px;
 }
 .dataTable_wrapper h2 {
   position: absolute;
@@ -227,8 +228,8 @@ a:visited {
   outline: none; }
 
 a:hover, a:focus, a:active {
-  color: #000000;
-  text-decoration: none;
+  color:#e3e8ea;
+  text-decoration: underline;
   outline: none; }
 
 a:focus {
@@ -1306,14 +1307,16 @@ div#example_filter {
     .header-section {
       display: none; } }
   .header-section .header-area.menu-fixed {
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
-    top: 0;
+    /* top: 0; */
     background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
   .header-section .primary-menu {
     align-items: center;
-    justify-content: space-between; }
+    justify-content: space-between; 
+    line-height: 0;
+  }
 @media (min-width: 992px) and (max-width: 1199px) {
   .header-section .primary-menu .logo {
     width: 140px; } }
@@ -1332,7 +1335,7 @@ div#example_filter {
           .header-section .primary-menu .main-area .main-menu ul li.active > a {
             color: #ff3372; }
           .header-section .primary-menu .main-area .main-menu ul li a {
-            padding: 38px 20px;
+            padding: 33px 20px;
             color: #000000;
             font-size: 16px;
             display: block;
@@ -1434,7 +1437,8 @@ div#example_filter {
   width: 100%;
   top: 0px;
   z-index: 999;
-  background: transparent; }
+  background: rgba(6, 38, 77, 0.65);
+}
   .transparent-header .primary-menu .main-area .main-menu ul li a {
     color: #fff; }
   .transparent-header .primary-menu .main-area .header-btn .lab-btn span {

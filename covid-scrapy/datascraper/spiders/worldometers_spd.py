@@ -99,6 +99,15 @@ class Etuannv(scrapy.Spider):
             callback=self.parse,
             dont_filter=True,
         )
+        # Request to get us
+        yield Request(
+            url='https://www.worldometers.info/coronavirus/country/us/', 
+            callback=self.parse_country,
+            dont_filter=True,
+            meta={
+                'group': 'us'
+            }
+        )
     
     def parse(self, response):
         rows = response.xpath("//table[@id='main_table_countries_today']/tbody/tr[td[a[contains(@href,'country')]]]")
@@ -167,6 +176,50 @@ class Etuannv(scrapy.Spider):
 
             data_item.add_value('tests', row.xpath("./td[11]/text()").get())
             
+            
+            ts = time.time()
+            timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+            data_item.add_value('created_at', timestamp)
+            data_item.add_value('created_by', self.name)
+            data_item.add_value('modified_at', timestamp)
+            data_item.add_value('last_scraped', timestamp)
+            data_item.add_value('modified_by', self.name)
+            data_item.add_value('table_name', 'app_covid')
+            data_item.add_value('ref_url', response.url)
+
+            yield data_item.load_item()
+
+
+    def parse_country(self, response):
+        group = response.meta['group']
+        rows = response.xpath("//table[@id='usa_table_countries_today']/tbody[1]/tr[position()>1]")
+        others = response.xpath("//table[@id='usa_table_countries_today']/tbody[2]/tr[position()<last()]")
+        rows.extend(others)
+        
+        for row in rows:
+            data_item = ItemLoader(item=CovidItem(), response=response)
+            from datetime import date
+            today = date.today()
+            name = row.xpath("./td[1]/text()").get()
+            item_id = md5(('{}_{}'.format(name, today)).encode('utf-8')).hexdigest()
+            data_item.add_value('id', item_id)
+            
+            data_item.add_value('name', name)
+            data_item.add_value('group', group)
+            data_item.add_value('date', today)
+            
+            data_item.add_value('total_case', row.xpath("./td[2]/text()").get())
+            data_item.add_value('new_case', row.xpath("./td[3]/text()").get())
+
+            # data_item.add_value('total_recovered', row.xpath("./td[6]/text()").get())
+            
+            data_item.add_value('active_case', row.xpath("./td[6]/text()").get())
+            
+            data_item.add_value('deaths', row.xpath("./td[4]/text()").get())
+            data_item.add_value('new_deaths', row.xpath("./td[5]/text()").get())
+
+            data_item.add_value('tests', row.xpath("./td[9]/text()").get())
+
             
             ts = time.time()
             timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
