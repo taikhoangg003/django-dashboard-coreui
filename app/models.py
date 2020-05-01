@@ -12,7 +12,7 @@ import uuid
 
 class Covid(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(verbose_name='Name', max_length=25, blank=True, null=True)
+    name = models.CharField(verbose_name='Name', max_length=225, blank=True, null=True)
     group = models.CharField(verbose_name='Group by country or city', max_length=25, blank=True, null=True)
     total_case = models.IntegerField(verbose_name='Total cases', default=0, blank=True, null=True)
     new_case = models.IntegerField(verbose_name='New Cases', default=0, blank=True, null=True)
