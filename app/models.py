@@ -44,6 +44,13 @@ class PAData(models.Model):
     new_customer_offer = models.CharField(verbose_name='New Customer Offer ', max_length=225, default='', blank=True, null=True)
     # This for ohio scraper
     term_of_service = models.CharField(verbose_name='Terms of Service ', max_length=1000, default='', blank=True, null=True)
+
+    # Specifix for PowerToChoos
+    fact_sheet = models.CharField(verbose_name='EFL Fact Sheet', max_length=1000, default='', blank=True, null=True)
+    fiveh_kwh = models.FloatField(verbose_name='500 kWh', default=0)
+    onek_kwh = models.FloatField(verbose_name='1000 kWh', default=0)
+    twok_kwh = models.FloatField(verbose_name='2000 kWh', default=0)
+    rating = models.FloatField(verbose_name='Rating', default=0)
     
     ref_url = models.CharField(verbose_name='Refernce url', max_length=500, blank=True, null=True )
     

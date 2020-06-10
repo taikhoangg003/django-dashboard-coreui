@@ -82,6 +82,18 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             context['ohio_gas_last_scraped'] = latest_item.created_at
         else:
             context['ohio_gas_last_scraped'] = None
+        
+
+        ## Power To Choose
+        context['p2choose_total_records'] = PAData.objects.all().filter(created_by='p2choose_spd').count()
+        context['p2choose_company_no'] = PAData.objects.exclude(company_name__isnull=True).filter(created_by='p2choose_spd').values('company_name').order_by('company_name').distinct().count()
+        context['p2choose_state_no'] = PAData.objects.exclude(state__isnull=True).filter(created_by='p2choose_spd').values('state').order_by('state').distinct().count()
+        latest_item = PAData.objects.filter(created_by='p2choose_spd')
+        if latest_item:
+            latest_item = latest_item.latest('created_at')
+            context['p2choose_last_scraped'] = latest_item.created_at
+        else:
+            context['p2choose_last_scraped'] = None
 
         return context
 
@@ -210,3 +222,45 @@ class OhioGasListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
 class OhioGasDetailView(LoginRequiredMixin, DetailView):
     model = PAData
     template_name = "app/ohio_gas_detail.html"
+
+
+class P2ChooseListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
+    model = PAData
+    
+    table_class = P2ChooseTable
+    context_object_name = 'data_table'
+    template_name = "app/p2choose_list.html"
+    my_export_data = None
+    export_name='PowerToChoose_' + time.strftime('%Y%m%d_%H_%M_%S')
+    
+
+    def get_context_data(self, **kwargs):
+        list = PAData.objects.filter(created_by='p2choose_spd')
+        filter = P2ChooseFilter(self.request.GET, queryset=list)
+        data_table = P2ChooseTable(filter.qs)
+        
+        RequestConfig(self.request).configure(data_table)
+        per_page = self.request.GET.get('per_page', 100)
+        data_table.paginate(page=self.request.GET.get('page', 1), per_page=per_page)
+        self.my_export_data = data_table
+        context = super(P2ChooseListView, self).get_context_data(**kwargs)
+        context['data_table'] = data_table
+        context['filter'] = filter
+        
+        return context
+    
+    def create_export(self, export_format):
+        
+        exporter = self.export_class(
+            export_format=export_format,
+            table=self.my_export_data,
+            # exclude_columns=self.exclude_columns,
+            # dataset_kwargs=self.get_dataset_kwargs(),
+        )
+
+        return exporter.response(filename=self.get_export_filename(export_format))
+
+
+class P2ChooseDetailView(LoginRequiredMixin, DetailView):
+    model = PAData
+    template_name = "app/p2choose_detail.html"
