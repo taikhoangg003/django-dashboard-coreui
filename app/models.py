@@ -18,10 +18,10 @@ class PAData(models.Model):
     company_name = models.CharField(verbose_name='Company Name', max_length=500, blank=True, null=True )
     plan_type = models.CharField(verbose_name='Plan type', max_length=500, blank=True, null=True )
     
-    price_rate = models.FloatField(verbose_name='Price rate', default=0)
-    monthly_fee = models.FloatField(verbose_name='Monthly free', default=0)
-    enrollment_fee = models.FloatField(verbose_name='Enrollment fee', default=0)
-    cancellation_fee = models.FloatField(verbose_name='Cancellation fee', default=0)
+    price_rate = models.FloatField(verbose_name='Price rate', default=None, null=True)
+    monthly_fee = models.FloatField(verbose_name='Monthly free', default=None, null=True)
+    enrollment_fee = models.FloatField(verbose_name='Enrollment fee', default=None, null=True)
+    cancellation_fee = models.FloatField(verbose_name='Cancellation fee', default=None, null=True)
 
     term_length = models.IntegerField(verbose_name='Term length', blank=True, null=True )
     renewable = models.CharField(verbose_name='Renewable', max_length=25, blank=True, null=True )
@@ -47,10 +47,10 @@ class PAData(models.Model):
 
     # Specifix for PowerToChoos
     fact_sheet = models.CharField(verbose_name='EFL Fact Sheet', max_length=1000, default='', blank=True, null=True)
-    fiveh_kwh = models.FloatField(verbose_name='500 kWh', default=0)
-    onek_kwh = models.FloatField(verbose_name='1000 kWh', default=0)
-    twok_kwh = models.FloatField(verbose_name='2000 kWh', default=0)
-    rating = models.FloatField(verbose_name='Rating', default=0)
+    fiveh_kwh = models.FloatField(verbose_name='500 kWh', default=None, null=True)
+    onek_kwh = models.FloatField(verbose_name='1000 kWh', default=None, null=True)
+    twok_kwh = models.FloatField(verbose_name='2000 kWh', default=None, null=True)
+    rating = models.FloatField(verbose_name='Rating', default=None, null=True)
     
     ref_url = models.CharField(verbose_name='Refernce url', max_length=500, blank=True, null=True )
     
