@@ -122,6 +122,7 @@ class Etuannv(scrapy.Spider):
             
             data_item.add_value('name', name)
             data_item.add_value('group', row.xpath("./td[contains(@data-continent,'a')]/@data-continent").get())
+            data_item.add_value('group', row.xpath("./td[contains(@data-continent,'e')]/@data-continent").get())
             data_item.add_value('date', today)
             
             data_item.add_value('total_case', row.xpath("./td[3]/text()").get())
