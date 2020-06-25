@@ -116,25 +116,25 @@ class Etuannv(scrapy.Spider):
             data_item = ItemLoader(item=CovidItem(), response=response)
             from datetime import date
             today = date.today()
-            name = row.xpath("./td[1]/a/text()").get()
+            name = row.xpath("./td[2]/a/text()").get()
             item_id = md5(('{}_{}'.format(name, today)).encode('utf-8')).hexdigest()
             data_item.add_value('id', item_id)
             
             data_item.add_value('name', name)
-            data_item.add_value('group', row.xpath("./td[last()]/@data-continent").get())
+            data_item.add_value('group', row.xpath("./td[contains(@data-continent,'a')]/@data-continent").get())
             data_item.add_value('date', today)
             
-            data_item.add_value('total_case', row.xpath("./td[2]/text()").get())
-            data_item.add_value('new_case', row.xpath("./td[3]/text()").get())
+            data_item.add_value('total_case', row.xpath("./td[3]/text()").get())
+            data_item.add_value('new_case', row.xpath("./td[4]/text()").get())
 
-            data_item.add_value('total_recovered', row.xpath("./td[6]/text()").get())
+            data_item.add_value('total_recovered', row.xpath("./td[7]/text()").get())
             
-            data_item.add_value('active_case', row.xpath("./td[7]/text()").get())
+            data_item.add_value('active_case', row.xpath("./td[8]/text()").get())
             
-            data_item.add_value('deaths', row.xpath("./td[4]/text()").get())
-            data_item.add_value('new_deaths', row.xpath("./td[5]/text()").get())
+            data_item.add_value('deaths', row.xpath("./td[5]/text()").get())
+            data_item.add_value('new_deaths', row.xpath("./td[6]/text()").get())
 
-            data_item.add_value('tests', row.xpath("./td[11]/text()").get())
+            data_item.add_value('tests', row.xpath("./td[13]/text()").get())
 
             
             ts = time.time()
@@ -156,7 +156,7 @@ class Etuannv(scrapy.Spider):
             data_item = ItemLoader(item=CovidItem(), response=response)
             from datetime import date
             today = date.today()
-            name = row.xpath("./td[1]/text()").get()
+            name = row.xpath("./td[2]/text()").get()
             item_id = md5(('{}_{}'.format(name, today)).encode('utf-8')).hexdigest()
             data_item.add_value('id', item_id)
             
@@ -164,17 +164,17 @@ class Etuannv(scrapy.Spider):
             data_item.add_value('group', 'World')
             data_item.add_value('date', today)
             
-            data_item.add_value('total_case', row.xpath("./td[2]/text()").get())
-            data_item.add_value('new_case', row.xpath("./td[3]/text()").get())
+            data_item.add_value('total_case', row.xpath("./td[3]/text()").get())
+            data_item.add_value('new_case', row.xpath("./td[4]/text()").get())
 
-            data_item.add_value('total_recovered', row.xpath("./td[6]/text()").get())
+            data_item.add_value('total_recovered', row.xpath("./td[7]/text()").get())
             
-            data_item.add_value('active_case', row.xpath("./td[7]/text()").get())
+            data_item.add_value('active_case', row.xpath("./td[8]/text()").get())
             
-            data_item.add_value('deaths', row.xpath("./td[4]/text()").get())
-            data_item.add_value('new_deaths', row.xpath("./td[5]/text()").get())
+            data_item.add_value('deaths', row.xpath("./td[5]/text()").get())
+            data_item.add_value('new_deaths', row.xpath("./td[6]/text()").get())
 
-            data_item.add_value('tests', row.xpath("./td[11]/text()").get())
+            data_item.add_value('tests', row.xpath("./td[13]/text()").get())
             
             
             ts = time.time()
@@ -200,7 +200,7 @@ class Etuannv(scrapy.Spider):
             data_item = ItemLoader(item=CovidItem(), response=response)
             from datetime import date
             today = date.today()
-            name = row.xpath("./td[1]/text()").get()
+            name = row.xpath("./td[1]/a/text()").get()
             item_id = md5(('{}_{}'.format(name, today)).encode('utf-8')).hexdigest()
             data_item.add_value('id', item_id)
             
