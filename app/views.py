@@ -17,8 +17,8 @@ import django_tables2 as tables
 from django_tables2.export.views import ExportMixin
 
 from .models import *
-#from .filters import *
-#from .tables import *
+from .filters import *
+from .tables import *
 from pytz import timezone
 import time
 
