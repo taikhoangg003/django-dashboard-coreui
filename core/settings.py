@@ -99,8 +99,8 @@ DATABASES = {
 }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
+DATABASES = { 'default' : dj_database_url.config()}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -159,3 +159,8 @@ LOGIN_URL = '/login'
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 
 SHORT_DATE_FORMAT = 'M d,Y H:i'
+
+try:
+  from local_settings import *
+except Exception as e:
+  pass
