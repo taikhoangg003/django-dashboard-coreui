@@ -22,5 +22,8 @@ urlpatterns = [
 
     path('ohio-gas/list', views.OhioGasListView.as_view(), name='ohio_gas_list'),
     path('ohio-gas/detail/<pk>', views.OhioGasDetailView.as_view(), name='ohio_gas_detail'),
+
+    path('p2choose/list', views.P2ChooseListView.as_view(), name='p2choose_list'),
+    path('p2choose/detail/<pk>', views.P2ChooseDetailView.as_view(), name='p2choose_detail'),
     
 ]

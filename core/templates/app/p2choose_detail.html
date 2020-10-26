@@ -3,10 +3,10 @@
 {% load export_url from django_tables2 %}
 {% load widget_tweaks %}
 
-{% block title %} PAPowerswitch Data List {% endblock %} 
+{% block title %} PowerToChoose Gas Detail {% endblock %} 
 {% block breadcrumb %} 
-<li class="breadcrumb-item"><a href={% url 'pa_list' %}>PAPowerswitch List</a></li>
-<li class="breadcrumb-item">PAPowerswitch List</li>
+<li class="breadcrumb-item"><a href={% url 'p2choose_list' %}>PowerToChoose Gas List</a></li>
+<li class="breadcrumb-item">PowerToChoose Gas Detail</li>
 {% endblock %} 
 
 {% block content %}
@@ -103,6 +103,30 @@
         </div>
 
         <div class="form-group row">
+          <label class="col-md-2 col-form-label" style="text-align: right;">500 kWh </label>
+          <div class="col-md-4">
+            <input class="form-control" value="{{object.fiveh_kwh}}" readonly>
+          </div>
+
+          <label class="col-md-2 col-form-label" style="text-align: right;">1000 kWh</label>
+          <div class="col-md-4">
+            <input class="form-control" value="{{object.onek_kwh}}" readonly>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" style="text-align: right;">2000 kWh </label>
+          <div class="col-md-4">
+            <input class="form-control" value="{{object.twok_kwh}}" readonly>
+          </div>
+
+          <label class="col-md-2 col-form-label" style="text-align: right;">Rating</label>
+          <div class="col-md-4">
+            <input class="form-control" value="{{object.rating}}" readonly>
+          </div>
+        </div>
+
+        <div class="form-group row">
           <label class="col-md-2 col-form-label" style="text-align: right;">Domain Name</label>
           <div class="col-md-10">
             <input class="form-control" value="{{object.domain_name}}" readonly>
@@ -113,6 +137,13 @@
           <label class="col-md-2 col-form-label" style="text-align: right;">Signup URL </label>
           <div class="col-md-10">
             <input class="form-control" value="{{object.signup_url}}" readonly>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" style="text-align: right;">EFL Fact Sheet </label>
+          <div class="col-md-10">
+            <input class="form-control" value="{{object.fact_sheet}}" readonly>
           </div>
         </div>
 

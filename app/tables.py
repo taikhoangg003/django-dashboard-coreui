@@ -132,4 +132,59 @@ class OhioGasTable(OhioTable):
         args=[A('pk')],
         footer=lambda table: 'Total: {} records'.format(len(table.data))
         )
-    
+
+
+class P2ChooseTable(PADataTable):
+    company_name  = tables.LinkColumn(
+        'p2choose_detail', 
+        text=lambda record: record.company_name, 
+        args=[A('pk')],
+        footer=lambda table: 'Total: {} records'.format(len(table.data))
+        )
+    new_customer_offer = tables.Column(visible=False)
+    term_of_service = tables.Column(visible=False)
+    est_monthly = tables.Column(visible=False)
+    product_last_update = tables.Column(visible=False)
+    fact_sheet = tables.Column(visible=False)
+    fiveh_kwh = tables.Column(visible=False)
+    onek_kwh = tables.Column(visible=False)
+    twok_kwh = tables.Column(visible=False)
+    rating = tables.Column(visible=False)
+
+    class Meta:
+        attrs = {
+            'class':'table table-responsive-sm table-bordered table-striped table-sm'
+        }
+        model = PAData
+        fields = (
+            'zipcode',
+            'state', 
+            'utility_name',
+            'utility_code', 
+            'company_name', 
+            'price_rate',
+            'plan_type',
+            'monthly_fee', 
+            'enrollment_fee',
+            'cancellation_fee',
+            'est_monthly',
+            'term_length',
+            'renewable',
+            'product_info',
+            'phone_number',
+            'signup_url',
+            'site_name',
+            'domain_name',
+            'current_ptc',
+            'future_ptc',
+            'future_ptc_date',
+            'product_last_update',
+            'last_scraped',
+            'new_customer_offer',
+            'term_of_service',
+            'fact_sheet',
+            'fiveh_kwh',
+            'onek_kwh',
+            'twok_kwh',
+            'rating'
+        )
