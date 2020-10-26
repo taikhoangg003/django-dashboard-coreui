@@ -20,10 +20,11 @@ class PADataFilter(django_filters.FilterSet):
     # Filter by zipcode
     all_zipcodes = PAData.objects.filter(created_by='pa_spd').values('zipcode').order_by('zipcode').distinct()
     zipcode_choices = []
-    for item in all_zipcodes:
-        zipcode_choices.append((item['zipcode'], item['zipcode']))
+    if len(all_zipcodes) > 0:
+        for item in all_zipcodes:
+            zipcode_choices.append((item['zipcode'], item['zipcode']))
     
-    zipcode = django_filters.ChoiceFilter(label="Zipcode", choices=zipcode_choices)
+        zipcode = django_filters.ChoiceFilter(label="Zipcode", choices=zipcode_choices)
 
     # Filter by state
     all_states = PAData.objects.filter(created_by='pa_spd').values('state').order_by('state').distinct()
