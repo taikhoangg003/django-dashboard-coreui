@@ -18,10 +18,10 @@ PROJECT_DIR = Path(__file__).parent
 SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_5548')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False)
+DEBUG = config('DEBUG', default=True)
 ISLOCAL = config('ISLOCAL', default=False)
 
-ALLOWED_HOSTS        = ['localhost', '127.0.0.1', config('PRODUCTION_SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS        = ['*']
 CSRF_TRUSTED_ORIGINS = [config('PRODUCTION_SERVER', default='127.0.0.1')]
 
 # Application definition
@@ -87,16 +87,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
-        'PORT': config('DB_PORT', default=3306),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
+#         'PORT': config('DB_PORT', default=3306),
+#     }
+# }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 
