@@ -6,7 +6,7 @@ from app import views
 urlpatterns = [
     # Matches any html file 
     #re_path(r'^.*\.html', views.pages, name='pages'),      
-    path('', views.baseView.as_view(), name='home'),
+    path('', views.BaseView.as_view(), name='home'),
 #     path('pa/list', views.PADataListView.as_view(), name='pa_list'),
 #     path('pa/detail/<pk>', views.PADataDetailView.as_view(), name='pa_detail'),
     
