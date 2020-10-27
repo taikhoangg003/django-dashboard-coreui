@@ -7,6 +7,8 @@ mysqlclient
 tablib
 django-filter
 django-widget-tweaks
-#sql->postgresql
+gunicorn
+###postgresql
 psycopg2
 dj_database_url
+
