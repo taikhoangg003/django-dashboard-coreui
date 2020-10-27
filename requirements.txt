@@ -7,3 +7,5 @@ mysqlclient
 tablib
 django-filter
 django-widget-tweaks
+psycopg2
+dj_database_url
