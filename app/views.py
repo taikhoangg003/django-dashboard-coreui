@@ -264,6 +264,3 @@ class P2ChooseListView(LoginRequiredMixin, ExportMixin, tables.SingleTableView):
 class P2ChooseDetailView(LoginRequiredMixin, DetailView):
     model = PAData
     template_name = "app/p2choose_detail.html"
-    
-class BaseView():
-    template_name = "pages/error-404.html"
