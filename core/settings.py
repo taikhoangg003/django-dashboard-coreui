@@ -18,7 +18,7 @@ PROJECT_DIR = Path(__file__).parent
 SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_5548')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False)
+DEBUG = config('DEBUG', default=True)
 ISLOCAL = config('ISLOCAL', default=False)
 
 ALLOWED_HOSTS        = ['*']
