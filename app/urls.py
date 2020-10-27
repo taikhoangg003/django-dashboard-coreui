@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 
 from django.urls import path, re_path
-from app import views
+from app import tests
 
 urlpatterns = [
     # Matches any html file 
     #re_path(r'^.*\.html', views.pages, name='pages'),      
-    path('', views.BaseView.as_view(), name='home'),
+    path('', tests.BaseView.as_view(), name='home'),
 #     path('pa/list', views.PADataListView.as_view(), name='pa_list'),
 #     path('pa/detail/<pk>', views.PADataDetailView.as_view(), name='pa_detail'),
     
