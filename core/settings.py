@@ -21,7 +21,7 @@ SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_5548')
 DEBUG = config('DEBUG', default=False)
 ISLOCAL = config('ISLOCAL', default=False)
 
-ALLOWED_HOSTS        = ['localhost', '127.0.0.1', 'my_server', 'herokuapp.com', config('PRODUCTION_SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS        = ['*']
 CSRF_TRUSTED_ORIGINS = [config('PRODUCTION_SERVER', default='127.0.0.1')]
 
 # Application definition
