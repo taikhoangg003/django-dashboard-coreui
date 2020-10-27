@@ -17,7 +17,8 @@ class CovidFilter(django_filters.FilterSet):
     # Filter by group
     all_groups = Covid.objects.all().values('group').order_by('group').distinct()
     group_choices = []
-    for item in all_groups:
-        group_choices.append((item['group'], item['group']))
+    #     for item in all_groups:
+    #         group_choices.append((item['group'], item['group']))
     
-    group = django_filters.ChoiceFilter(label="Group", choices=group_choices)
+    group = []
+    #django_filters.ChoiceFilter(label="Group", choices=group_choices)
