@@ -5,6 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 import os
+import dj_database_url
 from decouple import config
 from unipath import Path
 
@@ -99,6 +100,9 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+
+DATABASES = { 'default' : dj_database_url.config()}
 
 
 # Password validation
