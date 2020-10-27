@@ -265,4 +265,5 @@ class P2ChooseDetailView(LoginRequiredMixin, DetailView):
     model = PAData
     template_name = "app/p2choose_detail.html"
     
-class baseView():   
+class BaseView():
+    template_name = "pages/error-404.html"
