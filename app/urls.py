@@ -6,7 +6,7 @@ from django.urls import path, re_path
 urlpatterns = [
     # Matches any html file 
     #re_path(r'^.*\.html', views.pages, name='pages'),      
-    path('', views.DashboardView.as_view(), name='home'),
+    path('', views.baseView(), name='home'),
 #     path('pa/list', views.PADataListView.as_view(), name='pa_list'),
 #     path('pa/detail/<pk>', views.PADataDetailView.as_view(), name='pa_detail'),
     
