@@ -1,14 +1,12 @@
 # -*- encoding: utf-8 -*-
 
-# from django.urls import path, re_path
-# from app import views
+from django.urls import path, re_path
+#from app import views
 
-# urlpatterns = [
-#     # Matches any html file 
-#     re_path(r'^.*\.html', views.pages, name='pages'),
-
-#     # The home page
-#     # path('', views.index, name='home'),
+urlpatterns = [
+    # Matches any html file 
+    #re_path(r'^.*\.html', views.pages, name='pages'),   
+    path('', views.index, name='home'),
 #     path('', views.DashboardView.as_view(), name='home'),
 #     path('pa/list', views.PADataListView.as_view(), name='pa_list'),
 #     path('pa/detail/<pk>', views.PADataDetailView.as_view(), name='pa_detail'),
@@ -22,8 +20,5 @@
 #     path('p2choose/list', views.P2ChooseListView.as_view(), name='p2choose_list'),
 #     path('p2choose/detail/<pk>', views.P2ChooseDetailView.as_view(), name='p2choose_detail'),
     
-# ]
+]
 
-def simple(request):
-    context = {}
-    return render(request, 'base.html', context)
